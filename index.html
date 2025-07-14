@@ -142,6 +142,22 @@
 
   <div id="thank-you">Thanks! Your booking has been submitted.</div>
 
+   <div id="disqus_thread"></div>
+   <script>
+     var disqus_config = function () {
+       this.page.url = window.location.href;
+       this.page.identifier = window.location.pathname;
+     };
+     (function() {
+       var d = document, s = d.createElement('script');
+       s.src = 'https://alekszgarden.disqus.com/embed.js';
+       s.setAttribute('data-timestamp', +new Date());
+       (d.head || d.body).appendChild(s);
+     })();
+   </script>
+   <noscript>Please enable JavaScript to view the comments.</noscript>
+
+
   <script>
     function startOrder() {
       document.getElementById('step-1').style.display = 'block';
@@ -187,6 +203,7 @@
         document.getElementById('thank-you').style.display = 'block';
       }, 100);
     });
+ 
   </script>
 
 </body>
