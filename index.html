@@ -64,6 +64,37 @@
   <h1>Weed Removal Services</h1>
   <p>Book a weed removal — quick & easy.</p>
 
+  <div style="max-width: 600px; margin: 40px auto; padding: 20px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 16px; line-height: 1.6;">
+
+  <h2 style="color: #2e8b57;">🌿 Need Help with Garden Weeds? Let Me Do the Dirty Work!</h2>
+  <p><strong>Reliable & Affordable Weed Removal Services by a Local 12-year-old.</strong></p>
+
+  <p>Hi, I’m Aleksandr, a SR resident — I’m starting a small gardening business to help neighbors keep their yards clean and tidy!</p>
+
+  <h3 style="color: #2e8b57;">🛠️ Services Offered:</h3>
+  <ul>
+    <p>Weed pulling & cleanup (flower beds, garden edges, walkways)</p>
+    <p>Light raking and debris removal</p>
+  </ul>
+
+  <h3 style="color: #2e8b57;">💵 Affordable Prices:</h3>
+  <ul>
+    <p>Front yard or flower beds: <strong>$10–$25</strong> (depends on size)</p>
+    <p>Full yard weed cleanup: <strong>$25–$50</strong></p>
+    <p><em>First-time 10% discount!</em></p>
+  </ul>
+
+  <h3 style="color: #2e8b57;">📞 Contact Me Today!</h3>
+  <p><strong>Text me:</strong> <a href="tel:7203607188">720-360-7188</a><br>
+     <strong>Email:</strong> <a href="mailto:aleksandr.zhilin.2023@gmail.com">aleksandr.zhilin.2023@gmail.com</a></p>
+
+  <p><strong>Support a young entrepreneur & enjoy a cleaner yard!<br>(Cash Preferred)</strong></p>
+
+  <p style="color: #333;"><em>Additional services available upon request</em></p>
+
+</div>
+
+
   <button onclick="startOrder()">Order</button>
 
   <div id="step-1" class="step">
@@ -76,15 +107,23 @@
   <div id="step-2" class="step">
     <h2>Select a Time</h2>
     <label><input type="radio" name="time" value="9:00 AM" required> 9:00 AM</label><br>
-    <label><input type="radio" name="time" value="7:00 PM"> 7:00 PM</label><br>
+    <label><input type="radio" name="time" value="6:00 PM"> 6:00 PM</label><br>
     <button onclick="nextStep(3)">Next</button>
   </div>
 
   <div id="step-3" class="step">
+      <h2>Additional Comments:</h2>
+      <label for="comment">(add your contacts and any additional information)</label><br>
+      <input type="text" name="comment" id="comment"><br>
+      <button onclick="nextStep(4)">Next</button>
+  </div>
+
+  <div id="step-4" class="step">
     <h2>Enter Your Details</h2>
     <form id="order-form" action="https://formspree.io/f/myzpgzyw" method="POST">
       <input type="hidden" name="date" id="form-date">
       <input type="hidden" name="time" id="form-time">
+      <input type="hidden" name="comment" id="form-comment">
 
       <label for="address">Address:</label><br>
       <input type="text" name="address" id="address" required><br>
@@ -95,43 +134,56 @@
       </select><br>
 
       <input type="submit" value="Submit Order">
+
     </form>
   </div>
+
+
 
   <div id="thank-you">Thanks! Your booking has been submitted.</div>
 
   <script>
     function startOrder() {
       document.getElementById('step-1').style.display = 'block';
+      document.getElementById('thank-you').style.display = 'none';
     }
 
     function nextStep(stepNumber) {
-      if (stepNumber === 2) {
-        const date = document.getElementById('date').value;
-        if (!date) return alert("Please select a date.");
-        document.getElementById('step-1').style.display = 'none';
-        document.getElementById('step-2').style.display = 'block';
-      }
+  if (stepNumber === 2) {
+    const date = document.getElementById('date').value;
+    if (!date) return alert("Please select a date.");
+    document.getElementById('step-1').style.display = 'none';
+    document.getElementById('step-2').style.display = 'block';
+  }
 
-      if (stepNumber === 3) {
-        const timeRadios = document.getElementsByName('time');
-        let selectedTime = "";
-        for (const radio of timeRadios) {
-          if (radio.checked) selectedTime = radio.value;
-        }
-        if (!selectedTime) return alert("Please select a time.");
-
-        document.getElementById('form-date').value = document.getElementById('date').value;
-        document.getElementById('form-time').value = selectedTime;
-
-        document.getElementById('step-2').style.display = 'none';
-        document.getElementById('step-3').style.display = 'block';
-      }
+  if (stepNumber === 3) {
+    const timeRadios = document.getElementsByName('time');
+    let selectedTime = "";
+    for (const radio of timeRadios) {
+      if (radio.checked) selectedTime = radio.value;
     }
+    if (!selectedTime) return alert("Please select a time.");
+
+    document.getElementById('form-date').value = document.getElementById('date').value;
+    document.getElementById('form-time').value = selectedTime;
+
+    document.getElementById('step-2').style.display = 'none';
+    document.getElementById('step-3').style.display = 'block';
+  }
+
+  if (stepNumber === 4) {
+    const comment = document.getElementById('comment').value;
+    document.getElementById('form-comment').value = comment;
+
+    document.getElementById('step-3').style.display = 'none';
+    document.getElementById('step-4').style.display = 'block';
+  }
+}
+
 
     document.getElementById('order-form').addEventListener('submit', function () {
       setTimeout(() => {
-        document.getElementById('step-3').style.display = 'none';
+        document.getElementById('step-4').style.display = 'none';
         document.getElementById('thank-you').style.display = 'block';
       }, 100);
     });
