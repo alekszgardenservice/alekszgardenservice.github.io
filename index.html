@@ -58,6 +58,8 @@
       color: green;
     }
   </style>
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -91,126 +93,26 @@
   <p><strong>Support a young entrepreneur & enjoy a cleaner yard!<br>(Cash Preferred)</strong></p>
 
   <p style="color: #333;"><em>Additional services available upon request</em></p>
-
 </div>
 
-
-  <button onclick="startOrder()">Order</button>
+  <button onclick="Calendly.initPopupWidget({url: 'https://calendly.com/aleksander-zhilin-business/30min'});return false;">Book Now</button>
 
   <div style="margin-top: 40px;"></div>
 
-  <div id="step-1" class="step">
-    <h2>Select a Date</h2>
-    <input type="date" id="date" required>
-    <br>
-    <button onclick="nextStep(2)">Next</button>
-    <div style="margin-top: 40px;"></div>
-  </div>
-
-  <div id="step-2" class="step">
-    <h2>Select a Time</h2>
-    <label><input type="radio" name="time" value="9:00 AM" required> 9:00 AM</label><br>
-    <label><input type="radio" name="time" value="6:00 PM"> 6:00 PM</label><br>
-    <button onclick="nextStep(3)">Next</button>
-    <div style="margin-top: 40px;"></div>
-  </div>
-
-  <div id="step-3" class="step">
-    <h2>Additional Comments:</h2>
-    <label for="comment">(add your contacts and any additional information)</label><br>
-    <input type="text" name="comment" id="comment"><br>
-    <button onclick="nextStep(4)">Next</button>
-    <div style="margin-top: 40px;"></div>
-  </div>
-
-  <div id="step-4" class="step">
-    <h2>Enter Your Details</h2>
-    <form id="order-form" action="https://formspree.io/f/myzpgzyw" method="POST">
-      <input type="hidden" name="date" id="form-date">
-      <input type="hidden" name="time" id="form-time">
-      <input type="hidden" name="comment" id="form-comment">
-
-      <label for="address">Address:</label><br>
-      <input type="text" name="address" id="address" required><br>
-
-      <label for="state">State:</label><br>
-      <select name="state" id="state" required>
-        <option value="CO" selected>Colorado (CO)</option>
-      </select><br>
-
-      <input type="submit" value="Submit Order">
-      <div style="margin-top: 40px;"></div>
-
-    </form>
-  </div>
-
-
-
-  <div id="thank-you">Thanks! Your booking has been submitted.</div>
-
-   <div id="disqus_thread"></div>
-   <script>
-     var disqus_config = function () {
-       this.page.url = window.location.href;
-       this.page.identifier = window.location.pathname;
-     };
-     (function() {
-       var d = document, s = d.createElement('script');
-       s.src = 'https://alekszgarden.disqus.com/embed.js';
-       s.setAttribute('data-timestamp', +new Date());
-       (d.head || d.body).appendChild(s);
-     })();
-   </script>
-   <noscript>Please enable JavaScript to view the comments.</noscript>
-
-
+  <div id="disqus_thread"></div>
   <script>
-    function startOrder() {
-      document.getElementById('step-1').style.display = 'block';
-      document.getElementById('thank-you').style.display = 'none';
-    }
-
-    function nextStep(stepNumber) {
-  if (stepNumber === 2) {
-    const date = document.getElementById('date').value;
-    if (!date) return alert("Please select a date.");
-    document.getElementById('step-1').style.display = 'none';
-    document.getElementById('step-2').style.display = 'block';
-  }
-
-  if (stepNumber === 3) {
-    const timeRadios = document.getElementsByName('time');
-    let selectedTime = "";
-    for (const radio of timeRadios) {
-      if (radio.checked) selectedTime = radio.value;
-    }
-    if (!selectedTime) return alert("Please select a time.");
-
-    document.getElementById('form-date').value = document.getElementById('date').value;
-    document.getElementById('form-time').value = selectedTime;
-
-    document.getElementById('step-2').style.display = 'none';
-    document.getElementById('step-3').style.display = 'block';
-  }
-
-  if (stepNumber === 4) {
-    const comment = document.getElementById('comment').value;
-    document.getElementById('form-comment').value = comment;
-
-    document.getElementById('step-3').style.display = 'none';
-    document.getElementById('step-4').style.display = 'block';
-  }
-}
-
-
-    document.getElementById('order-form').addEventListener('submit', function () {
-      setTimeout(() => {
-        document.getElementById('step-4').style.display = 'none';
-        document.getElementById('thank-you').style.display = 'block';
-      }, 100);
-    });
- 
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname;
+    };
+    (function() {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://alekszgarden.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   </script>
+  <noscript>Please enable JavaScript to view the comments.</noscript>
 
 </body>
 </html>
